@@ -14,6 +14,7 @@ class home(controller):
     def directCall(self):
         print("direct methods has been called")
         self.output["directcalldata"] = self.Model("test","nepsedata")
+        self.__testx()
         
         
     def __testx(self):

@@ -19,12 +19,12 @@ class controller:
             self.db= conx(self.o)
         
         
-    def  execute(self,q):
+    def execute(self,q):
         self.connectdb()
         return self.db.execute(q)
         
     
-    def  fetch(self,q):
+    def fetch(self,q):
         self.connectdb()
         return self.db.fetch(q)
         
