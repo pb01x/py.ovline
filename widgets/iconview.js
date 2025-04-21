@@ -1,0 +1,1 @@
+_.view = { type: "container", id: "x", class: "imgx", style: `height:${data.height}; width:${data.width};  background-image: url('${data.icon}')` };

@@ -1,0 +1,24 @@
+{
+
+    "fsheetx":{
+        "query":"SELECT * FROM fsheet, #nepse WHERE nepse.symbol=fsheet.symbol LIMIT #limit ",
+        "#nepse":"(SELECT * from nepse) AS nepse",
+        "#limit": "10"
+
+    },
+
+    "fsheety":{
+        "query":"SELECT * FROM fsheet, #nepse WHERE nepse.symbol=fsheet.symbol LIMIT #limit ",
+        "#nepse":"(SELECT * from nepse) AS nepse",
+        "#limit": "1"
+    },
+
+    "nepsedata":{
+        "query":"SELECT * FROM nepse"
+    }
+
+
+
+
+
+}

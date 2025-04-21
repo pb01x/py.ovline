@@ -1,0 +1,119 @@
+
+
+.round1{
+    border-radius: 10px;
+}
+.round2{
+    border-radius: 20px;
+}
+.round3{
+    border-radius: 30px;
+}
+
+
+.folder{
+    opacity: 0.6;
+    font-weight: bold;
+}
+
+.folder::before{
+    content: "";
+    display: block;
+    background: url("/sf/icons/folder.svg") no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+.file::before{
+    content: "";
+    display: block;
+    background: url("/sf/icons/file.svg") no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin: 0 6px 0 0;
+}
+
+.treenode .active{
+    background: var(--accentx) !important;
+}
+
+.gridt{
+    border-top: 1px solid rgba(110, 110, 110, 0.596);
+}
+.grid{
+    border: 1px solid rgba(110, 110, 110, 0.596);
+}
+.gridb{
+    border-bottom: 1px solid rgba(110, 110, 110, 0.596);
+}
+.gridy{
+    border-top: 1px solid rgba(110, 110, 110, 0.596);
+    border-bottom: 1px solid rgba(110, 110, 110, 0.596);
+    margin-top: -1px;
+}
+.gridl{
+    border-left: 1px solid rgba(110, 110, 110, 0.596);
+}
+.gridr{
+    border-right: 1px solid rgba(110, 110, 110, 0.596);
+}
+.gridx{
+    border-left: 1px solid rgba(110, 110, 110, 0.596);
+    border-right: 1px solid rgba(110, 110, 110, 0.596);
+    margin-left: -1px;
+}
+
+.amt{
+    text-align: right;
+    padding-right: 10px;
+}
+
+.rows{
+    display: flex;
+    line-height: 30px;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.list .active{
+    background: var(--accentt) !important;
+}
+
+
+.sn{
+    width: 50px;
+    text-align: center;
+}
+
+.descp1{
+    text-align: left;
+    width: 300px;
+    padding-left: 10px;
+}
+
+.amt{
+    text-align: right;
+    min-width: 120px;
+    max-width: 180px;
+}
+.alignr{
+    text-align: right;
+}
+.alignc{
+    text-align: center;
+}
+.alignl{
+    text-align: left;
+}
+.total{
+    border-top: 2px solid rgba(110, 110, 110, 0.596);
+    font-weight: bold;
+    background: var(--accent) !important;
+    color: white;
+}

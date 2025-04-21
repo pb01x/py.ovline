@@ -1,0 +1,8 @@
+
+.navbtn{
+    background: transparent;
+    color: var(--fg);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+

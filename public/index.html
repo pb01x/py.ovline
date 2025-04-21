@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="OVLINE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/ext/jquery.js"></script>
+    <script src="/ext/crypto.js"></script>
+    <script src="/ext/feather.js"></script>
+    <script src="/main.js"></script>
+
+    <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.5/dist/chart.umd.min.js"></script>
+
+    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+    <script src="/ext/highcharts.js"></script>
+
+    <!-- <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script> -->
+
+    
+    <link rel="stylesheet" href="/main.css" >
+    <title>OVLINE</title>
+    <!-- <link rel=" icon" type="image/x-icon" href="/~:publicfolder:~/wbipwhite.ico"> -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+</head>
+
+<body style="margin: 0; background: rgb(41, 41, 41); color:white; ">
+    <menu-t>   </menu-t>
+    <div id="xcontent" class="lh fill" style="position: relative; overflow: auto;">
+        <menu-l></menu-l>
+        <bd>
+        <x-bdy ><h1 class="p-10" style="position: absolute; z-index: 1000;">Loading........</h1></x-bdy>
+        </bd>
+        <x-pop>
+            <div class="nav" >
+                <button class="close accent" onclick="ext.popclose()"><i data-feather="x"></i></button>
+            </div>
+            <div class="content">
+            </div>
+        </x-pop>
+        <modalx>
+            <div class="bgx" onclick="$('modalx').css('display','none')" style="background: #00000088; text-align: right; padding: 20px; opacity: 0.5; transition: opacity 2s;  width: 100%; height:100%;"><i data-feather="x" id="my-circle" class="foo bar" stroke-width="3"></i></div>
+            <div class="content" style="transition: top 0.5s; top: 6px; ">
+            </div>
+        </modalx>
+        <x-r1panel></x-r1panel>
+        <div id="loaderx" style="transition: width 0.5s;  position: absolute; left: 0px; top: 0px; z-index:1000; height:2px; "></div>
+    </div>
+    <x-fav>
+        <div class="lh">
+            Empty Here
+            <!-- <button class="whitebg" onclick="ext.thememode(1)">Light</button>
+            <button class="blackbg" onclick="ext.thememode(0)">Dark</button> -->
+        </div>
+    </x-fav>
+    <test>
+    </test>
+    <menu-b> </menu-b>
+
+
+
+    <dev-bdy style="position: fixed; z-index: 1000; background: rgb(49, 49, 49); margin: 0px; left: 0; bottom: 0px; width: 100%;">
+        <div class="lh p-2"  style="height: 300px;">
+            <textarea id="dev_input" spellcheck="false" class="p-4" style="  color: white; height: 100%; padding: 20px; border: 0;  width: 100%; background-color: rgba(0, 0, 0, 0.911); ">  </textarea>
+            <div id="widgetlist" class="p-4 scrollview" style="height: 100%; width: 130px;">
+                this is it
+            </div>
+        </div>
+    </dev-bdy>
+
+    <!-- <label class="switch" style="position: fixed; bottom: 10px; left: 10px; z-index: 100;">
+        <input id="cachebtn" type="checkbox" checked>
+        <span class="slider round"></span>
+    </label> -->
+
+</body>
+
+</html>

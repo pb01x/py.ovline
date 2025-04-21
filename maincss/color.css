@@ -1,0 +1,83 @@
+
+.whitebg{
+    background: white;
+    color: black;
+}
+
+.greenbg{
+    background: green;
+    color: white;
+}
+.cyanbg{
+    background: cyan;
+    color: white;
+}
+.bluebg{
+    background: rgb(19, 90, 197);
+    color: white;
+}
+
+.blackbg{
+    background: black;
+    color: white;
+}
+.yf1{
+    color: rgb(255, 180, 98);
+}
+
+
+
+.whitef{
+    color: white;
+}
+
+.nonf{
+    color: #ffffff88;
+}
+
+.redbg{
+    background: red;
+    color: white;
+}
+
+.greenf{
+    color: var(--green)
+}
+.redf{
+    color: var(--red)
+}
+.bluef{
+    color: var(--blue)
+}
+.pinkf{
+    color: var(--pink)
+}
+.purplef{
+    color: var(--purple)
+}
+.orangef{
+    color: var(--orange)
+}
+.yellowf{
+    color: var(--yellow)
+}
+.greyf{
+    color: var(--grey)
+}
+.cyanf{
+    color: var(--cyan)
+}
+
+
+.hide{
+    display: none;
+}
+
+
+.error{
+    border-bottom: 3px solid rgba(255, 0, 0, 0.486);
+}
+.date.error{
+    background-color: red;
+    color: white;
+}
