@@ -12,15 +12,15 @@ pagedata["testbtn"] = (e) => {
     console.log("yes its working");
 
 
-    // rqst.post(null, {path:"test", nodes:"fsheetx,fsheety", username:"prajwal", surname:"basnet"}, (resp) => {
+    // rqst.post(null, {path:"test", nodes:"__nepsedata,fsheetx", username:"prajwal", surname:"basnet"}, (resp) => {
     //     console.log(resp);
     // })
 
-    rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
-        console.log(resp);
-    })
-    // rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
+    // rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
     //     console.log(resp);
     // })
+    rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
+        console.log(resp);
+    })
 
 }

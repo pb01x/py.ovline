@@ -28,10 +28,9 @@ class postrouter:
             self.init()
         elif data.get("nodes") !=None:
             from system.model import model
-            self.o.output["data"]= model(self.o,data.get("path"), data.get("nodes").split(",")  ).output
+            self.o.output["data"]= model(self.o,data.get("path"), data.get("nodes").split(","), True  ).output
         else:
             self.pageRouter()
-        
         
         
     def init(self):
@@ -52,6 +51,9 @@ class postrouter:
         if fun==None:
             layout=self.readpage(file)
             self.o.output["layout"]=layout
+        elif fun[0:2]=="__":
+            self.o.output[fun]="Access Denied"
+            return
         
         import importlib
         module=None

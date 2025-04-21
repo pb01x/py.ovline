@@ -13,7 +13,7 @@
         "#limit": "1"
     },
 
-    "nepsedata":{
+    "__nepsedata":{
         "query":"SELECT * FROM nepse"
     }
 

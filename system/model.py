@@ -3,7 +3,7 @@ from system.io import io
 import json
 
 class model:
-    def __init__(self, o, path, nodes):
+    def __init__(self, o, path, nodes, ispublic=False):
         self.o=o
         self.db=None
         self.path=path
@@ -16,9 +16,10 @@ class model:
             output[nodes]=self.getData(nodes)
         else:
             for node in nodes:
-                # output.append(self.getData(node))
-                output[node]=self.getData(node)
-            
+                if not ispublic or node[0:2]!="__":
+                    output[node]=self.getData(node)
+                else:
+                    output[node]="Access Denied"
         self.output=output
         
     def connectdb(self):

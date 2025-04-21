@@ -13,12 +13,11 @@ class home(controller):
 
     def directCall(self):
         print("direct methods has been called")
-        self.output["directcalldata"] = self.Model("test","nepsedata")
+        self.output["directcalldata"] = self.Model("test","__nepsedata")
         self.__testx()
         
         
     def __testx(self):
-        self.output["privatemethoddata"] = self.Model("test","nepsedata")
+        self.output["privatemethoddata"] = self.Model("test","__nepsedata")
             
-        
         
