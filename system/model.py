@@ -6,9 +6,9 @@ class model:
     def __init__(self, o, path, nodes, ispublic=False):
         self.o=o
         self.db=None
-        self.path=path
+        self.path= o.req.mvcpath+path
         self.nodes=nodes
-        self.allnodes=json.loads(io.readfile("model/"+path+".json"))
+        self.allnodes=json.loads(io.readfile(o.req.mvcpath+"model/"+path+".json"))
         # self.o.logx(self.nodes[node])
         output={}
         self.output=output

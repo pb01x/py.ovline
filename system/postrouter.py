@@ -4,10 +4,14 @@ from system.o import o
 from system.io import io
 
 
+
+
 class postrouter:
+    x=0
     def __init__(self, requestRaw):
-        self.o=o(requestRaw)
+        self.req=requestRaw
         self.consolebreak()
+        self.o=o(requestRaw)
         self.route()
         self.o.sendoutput()        
     
@@ -40,12 +44,12 @@ class postrouter:
         
 
     def pageRouter(self):
-        self.o.logx(self.o.req.path)
+        self.o.logx(self.o.page)
         self.o.logx("=========================")
         
         fun=self.o.pars.get("fun")
         
-        file=(self.o.req.path+".js").replace("/.js","/home.js");
+        file=(self.o.page+".js").replace("/.js","/home.js");
         self.o.page=file.replace(".js","")
         if fun==None:
             layout=self.readpage(file)
@@ -78,7 +82,7 @@ class postrouter:
             layout= self.includeInclude(layout)
         except Exception:
             print(Exception)
-            print((self.o.req.mvcpath+"view"+self.o.req.path+".js").replace("/.js","/home.js")+" not found")
+            print((self.o.req.mvcpath+"view"+self.o.page+".js").replace("/.js","/home.js")+" not found")
         
         # print(layout)
         if self.o.security.pageroles_permission(layout) !=1:
@@ -104,9 +108,10 @@ class postrouter:
     
     
     def consolebreak(self):
-        self.o.tempx.x+=1
+        # self.o.tempx.x+=1
+        postrouter.x+=1
         print("\033[37m") 
         print("");
         print("");
-        print("\033[93m======================  "+str(self.o.tempx.x)+  "=============================")
-        print("--         "+self.o.req.path+"              --")
+        print("\033[93m=======================  "+str(postrouter.x)+"  ============================")
+        print("--         "+self.req.path+"              --")

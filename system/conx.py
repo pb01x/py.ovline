@@ -20,8 +20,10 @@ class conx():
         try:
             cursor = self.con.cursor()
             cursor.execute(q)
-            rows = cursor.fetchall()
-            return rows
+            data={}
+            data["name"]=[description[0] for description in cursor.description]
+            data["data"]=cursor.fetchall()
+            return data
         except sqlite3.Error as e:
             print(f"Error fetching data: {e}")
             return None

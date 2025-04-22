@@ -11,9 +11,10 @@ class o:
         self.req=req
         self.session=session(self)
         self.security=security(self)
-        self.page=req.path
+        # self.page=req.path
         self.output={}
         self.pars={}
+        self.handleurl()
 
   
     def sendoutput(self):
@@ -46,4 +47,19 @@ class o:
             print("\033[37m")
             
             
+    def handleurl(self):
+        aa=self.req.path.split("?")
+        self.page=aa[0]
+        # print(aa)
+        urlpars={}
+        if len(aa)>1:
+            x=aa[1].split("&")
+            for p in x:
+                y=p.split("=")
+                urlpars[y[0]]=y[1] 
             
+        self.urlpars=urlpars
+            
+        
+        
+        # self.page=self.req.path
