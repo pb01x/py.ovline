@@ -1,4 +1,4 @@
-from startserver import staticx
+from start import staticx
 import json
 import base64
 from system.session import session

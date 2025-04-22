@@ -1,10 +1,10 @@
 
 import sqlite3
-
+from start import staticx
 class conx():
     def __init__(self, o):
         self.o=o
-        self.con=sqlite3.connect("../ovline.db")
+        self.con=sqlite3.connect(staticx.config["dbpath"])
         
         
     def execute(self, q):

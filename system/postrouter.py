@@ -43,7 +43,6 @@ class postrouter:
         self.o.logx(self.o.req.path)
         self.o.logx("=========================")
         
-        
         fun=self.o.pars.get("fun")
         
         file=(self.o.req.path+".js").replace("/.js","/home.js");
@@ -58,7 +57,8 @@ class postrouter:
         import importlib
         module=None
         try:
-            module = importlib.import_module("controller"+self.o.page.replace("/","."))
+            print((self.o.req.mvcpath+ "controller"+self.o.page).replace("/","."))
+            module = importlib.import_module((self.o.req.mvcpath+ "controller"+self.o.page).replace("/","."))
             cntrlr = getattr(module, self.o.page.split("/")[-1] )(self.o)
             getattr(cntrlr, fun if fun!=None else "run" )()
         except Exception:
@@ -74,11 +74,11 @@ class postrouter:
         from system.io import io
         layout=""
         try:
-            layout=io.readfile("view"+file)
+            layout=io.readfile(self.o.req.mvcpath+"view"+file)
             layout= self.includeInclude(layout)
         except Exception:
             print(Exception)
-            print(("view"+self.o.req.path+".js").replace("/.js","/home.js")+" not found")
+            print((self.o.req.mvcpath+"view"+self.o.req.path+".js").replace("/.js","/home.js")+" not found")
         
         # print(layout)
         if self.o.security.pageroles_permission(layout) !=1:
@@ -108,6 +108,5 @@ class postrouter:
         print("\033[37m") 
         print("");
         print("");
-        print("-----------------------------------------------")
         print("\033[93m======================  "+str(self.o.tempx.x)+  "=============================")
         print("--         "+self.o.req.path+"              --")

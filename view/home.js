@@ -16,11 +16,11 @@ pagedata["testbtn"] = (e) => {
     //     console.log(resp);
     // })
 
-    // rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
-    //     console.log(resp);
-    // })
-    rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
+    rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
         console.log(resp);
     })
+    // rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
+    //     console.log(resp);
+    // })
 
 }

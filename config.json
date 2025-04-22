@@ -1,0 +1,13 @@
+
+
+{
+        
+    "serveraddress":"localhost",
+    "port":8000,
+    "dbmsport":9595,
+    "measuretime":1,
+    "dbpath":"../ovline.db"
+                
+        
+
+}
