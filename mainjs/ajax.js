@@ -179,7 +179,7 @@ const rqst = {
             $("x-pop").css("display", "none");
             handleLayout(response["layout"],null,response);
             feather.replace();
-            ext.autopad();
+            // ext.autopad();
             ext.r1panel(true);            
             // console.log("UI ",end("ui-processing-time"));
             

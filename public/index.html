@@ -37,8 +37,9 @@
 
 </head>
 
-<body style="margin: 0; background: rgb(41, 41, 41); color:white; ">
+<body style="margin: 0; background: var(--bg) ; color: var(--fg); ">
     <menu-t>   </menu-t>
+    <button class="lmenubtn"><i data-feather="menu"></i></button>
     <div id="xcontent" class="lh fill" style="position: relative; overflow: auto;">
         <menu-l></menu-l>
         <bd>
@@ -57,7 +58,7 @@
             </div>
         </modalx>
         <x-r1panel></x-r1panel>
-        <div id="loaderx" style="transition: width 0.5s;  position: absolute; left: 0px; top: 0px; z-index:1000; height:2px; "></div>
+        <div id="loaderx" style="transition: width 0.5s;  position: fixed; left: 0px; top: 0px; z-index:1000; height:2px; "></div>
     </div>
     <x-fav>
         <div class="lh">
@@ -71,6 +72,10 @@
     <menu-b> </menu-b>
 
 
+    <script>
+        ext.thememode(1);
+
+    </script>
 
     <dev-bdy style="position: fixed; z-index: 1000; background: rgb(49, 49, 49); margin: 0px; left: 0; bottom: 0px; width: 100%;">
         <div class="lh p-2"  style="height: 300px;">

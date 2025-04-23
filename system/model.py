@@ -3,12 +3,13 @@ from system.io import io
 import json
 
 class model:
-    def __init__(self, o, path, nodes, ispublic=False):
+    def __init__(self, o, path, nodes, ispublic=False, data=None):
         self.o=o
         self.db=None
         self.path= o.req.mvcpath+path
         self.nodes=nodes
         self.allnodes=json.loads(io.readfile(o.req.mvcpath+"model/"+path+".json"))
+        self.data=data
         # self.o.logx(self.nodes[node])
         output={}
         self.output=output
@@ -32,6 +33,7 @@ class model:
         self.connectdb()
         query=rawnode["query"]
         query=self.insertSubquery(rawnode,query)
+        print(query)
         return self.db.fetch(query)
         
         
@@ -42,8 +44,12 @@ class model:
             return query
         endX=query.find(" ",startX)
         xvar=query[startX:endX]
-        print(xvar)
-        query= query.replace(xvar,rawnode[xvar])
+        # print(xvar)
+        val=""
+        if rawnode.get(xvar)==None:
+            val=self.data[xvar]
+            
+        query= query.replace(xvar,val)
         return self.insertSubquery(rawnode,query)
         
         

@@ -9,6 +9,8 @@ class home(controller):
      
         # self.output["fsheet"]= self.fetch("SELECT * FROM fsheet limit 10")
         self.output["testfsheet"] = self.Model("test","fsheetx,fsheety")
+        self.renderpage()
+        
         
 
     def directCall(self):

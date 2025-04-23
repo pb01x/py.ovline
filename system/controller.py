@@ -29,10 +29,11 @@ class controller:
         return self.db.fetch(q)
         
         
-    def Model(self,path,nodes):
+    def Model(self,path,nodes, data=None):
         from system.model import model
-        return model(self.o, path,nodes.split(",")).output
+        return model(o=self.o, path=path,nodes= nodes.split(","),data=data).output
         
         
        
-        
+    def renderpage(self):
+        self.o.renderpage=True

@@ -46,7 +46,11 @@ function handleLayout(layout, parent, data = [], clear = true) {
       parent.append(value);
     },
   });
-
+  Object.defineProperty(_, "help", {
+    set(value) {
+      parent.append("");
+    },
+  });
   Object.defineProperty(_, "datapool", {
     set(value) {},
   });

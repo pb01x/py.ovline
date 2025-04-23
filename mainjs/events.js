@@ -21,8 +21,16 @@ $("html").on("keydown", function (e) {
 
 });
 
+$("html").on("submit", "form", (e) => {
+  e.preventDefault();
+  console.log($(e.target).serializeArray());
+  rqst.post("", $(e.target).serializeArray(), (resp) => {
+    console.log(resp);
+  })
+})
 
 $("html").on("click", ".xbtn", function (e) {
+
   if (e.target.hasAttribute("disabled")) return;
   if (this.hasAttribute("actionx")) {
     let parvar = $(this).attr("actionx").split(".");

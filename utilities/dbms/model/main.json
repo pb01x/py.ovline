@@ -3,6 +3,9 @@
     "tablelist":{
         "query":"SELECT name FROM sqlite_master WHERE type='table'"
        
+    },
+    "tabledata":{
+        "query":"SELECT * FROM #table LIMIT #limit "
     }
 
 

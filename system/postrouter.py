@@ -21,6 +21,10 @@ class postrouter:
         # req.send_header("Content-type", "text/json")
         content_len = int(req.headers['Content-Length'])
         post_body = req.rfile.read(content_len).decode()
+        if len(post_body)==0:
+            print("empty post request")
+            return
+            
         data = post_body.split("=")[1]
         
         data=json.loads(base64.b64decode(data.replace("%3D","=")))
@@ -48,28 +52,34 @@ class postrouter:
         self.o.logx("=========================")
         
         fun=self.o.pars.get("fun")
+        print(fun)
         
         file=(self.o.page+".js").replace("/.js","/home.js");
         self.o.page=file.replace(".js","")
-        if fun==None:
-            layout=self.readpage(file)
-            self.o.output["layout"]=layout
-        elif fun[0:2]=="__":
-            self.o.output[fun]="Access Denied"
-            return
+        
         
         import importlib
         module=None
+        self.o.renderpage=False
         try:
             print((self.o.req.mvcpath+ "controller"+self.o.page).replace("/","."))
             module = importlib.import_module((self.o.req.mvcpath+ "controller"+self.o.page).replace("/","."))
             cntrlr = getattr(module, self.o.page.split("/")[-1] )(self.o)
             getattr(cntrlr, fun if fun!=None else "run" )()
         except Exception:
+            self.o.renderpage=True
             import traceback
             traceback.print_exc()
-            
-    
+        
+        
+        if self.o.renderpage:
+            if fun==None:
+                layout=self.readpage(file)
+                self.o.output["layout"]=layout
+            elif fun[0:2]=="__":
+                self.o.output[fun]="Access Denied"
+                return
+        
         self.o.logx("=========================")
         
     
@@ -100,12 +110,14 @@ class postrouter:
         endi=layout.find(";",starti)
         includestr=layout[starti:endi]
         includeFile=includestr.split("=")[1].replace("\"","").lstrip()+".js"
-        includeLayout=io.readfile("view"+includeFile)
+        try:
+            includeLayout=io.readfile(self.o.req.mvcpath+"view"+includeFile)
+        except Exception:
+            print("ERROR READING : "+self.o.req.mvcpath+"view"+includeFile)
+            includeLayout=""
         modifiedLayout= layout.replace(includestr+";",includeLayout)
         return self.includeInclude(modifiedLayout)
        
-    
-    
     
     def consolebreak(self):
         # self.o.tempx.x+=1

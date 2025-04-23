@@ -3,8 +3,11 @@ import os
 class io:
     def readfile(path):
         # view/home.js
-        with open(path, 'r') as file:
-            data = file.read()
+        data=""
+        if not os.path.isdir(path):
+            with open(path, 'r') as file:
+                data = file.read()
+                
         return data
     
     

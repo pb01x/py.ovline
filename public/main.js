@@ -191,7 +191,7 @@ const rqst = {
             $("x-pop").css("display", "none");
             handleLayout(response["layout"],null,response);
             feather.replace();
-            ext.autopad();
+            // ext.autopad();
             ext.r1panel(true);            
             // console.log("UI ",end("ui-processing-time"));
             
@@ -895,8 +895,16 @@ $("html").on("keydown", function (e) {
 
 });
 
+$("html").on("submit", "form", (e) => {
+  e.preventDefault();
+  console.log($(e.target).serializeArray());
+  rqst.post("", $(e.target).serializeArray(), (resp) => {
+    console.log(resp);
+  })
+})
 
 $("html").on("click", ".xbtn", function (e) {
+
   if (e.target.hasAttribute("disabled")) return;
   if (this.hasAttribute("actionx")) {
     let parvar = $(this).attr("actionx").split(".");
@@ -1635,7 +1643,11 @@ function handleLayout(layout, parent, data = [], clear = true) {
       parent.append(value);
     },
   });
-
+  Object.defineProperty(_, "help", {
+    set(value) {
+      parent.append("");
+    },
+  });
   Object.defineProperty(_, "datapool", {
     set(value) {},
   });
@@ -2101,28 +2113,28 @@ const ext = {
   handlelayout: (layout,parent,data,clear) => {
     handleLayout(layout,parent,data,clear)
   },
-  autopad: () => {
-    if ($("menu-l").html()!="") {
-      $("menu-l").css("min-width", "200px");
-      $("bd").css("padding-left","200px");
-    }
-    else {
-      $("bd").css("padding-left","0px");
-    }
-    // $("x-bdy").css("padding-left", $("menu-l").width()+10);
-    if ($("menu-t").css("position")!="sticky") {
-      $("x-bdy").css("padding-top", $("menu-t").height());
-    }
-    $("x-fav").css("top", $("menu-t").height());
+  // autopad: () => {
+  //   if ($("menu-l").html()!="") {
+  //     $("menu-l").css("min-width", "200px");
+  //     $("bd").css("padding-left","200px");
+  //   }
+  //   else {
+  //     $("bd").css("padding-left","0px");
+  //   }
+  //   // $("x-bdy").css("padding-left", $("menu-l").width()+10);
+  //   if ($("menu-t").css("position")!="sticky") {
+  //     $("x-bdy").css("padding-top", $("menu-t").height());
+  //   }
+  //   $("x-fav").css("top", $("menu-t").height());
 
-    $("menu-l").css("padding-top", $("menu-t").height() + 20);
+  //   $("menu-l").css("padding-top", $("menu-t").height() + 20);
 
-    // if ($("x-pop").css("position")!="fixed") {
-    //     $("x-pop").css("padding-top", $("menu-t").height() );
-    //     $("x-pop").css("background", $("x-bdy").css("background-color"));
+  //   // if ($("x-pop").css("position")!="fixed") {
+  //   //     $("x-pop").css("padding-top", $("menu-t").height() );
+  //   //     $("x-pop").css("background", $("x-bdy").css("background-color"));
 
-    // }
-  },
+  //   // }
+  // },
   shortcut: (key, exec) => {
     if (pagedata["shortcut"] == undefined) pagedata["shortcut"] = {};
     pagedata["shortcut"][key] = exec;
@@ -2587,15 +2599,61 @@ $(document).ready(function () {
 
 
 
- const widx={testwidget:(_,data)=>{alert("this is test widget")},listviewer:(_,data)=>{
+ const widx={testwidget:(_,data)=>{alert("this is test widget")},tableviewer:(_,data)=>{
 
-let x=data.data    
+
+let dtx = data.data
+let outx = "";
+
+console.log(dtx["name"]);
+outx += `<tr class="accent">`;
+for (const key in dtx["name"]) {
+    outx += `<td>${dtx["name"][key]}</td>`;
+}
+outx += `</tr>`;
+
+console.log(dtx["data"]);
+for (const key in dtx["data"]) {
+    outx += `<tr>`;
+    for (const k in dtx["data"][key]) {
+        outx += `<td class="px-2">${dtx["data"][key][k]}</td>`;
+    }
+    outx += `</tr>`;
+}
+
+_.raw = `<table>${outx}</table>`;
+
+
+
+},formx:(_,data)=>{
+
+
+console.log(data);
+
+let inputs = data.data;
+
+let o = "";
+for (const i in inputs) {
+    console.log(inputs[i]);
+    let x = inputs[i];
+    o += `<div class="p-2"><label  style=" display:inline-block; width:${data.lblwidth}" for="${x.name}">${x.txt}</label> <input name="${x.name}" type="${x.type}" value=""></div>`;
+}
+
+let btntxt = data.btntxt??"Submit";
+o += `<div class="p-2"> <input class="btn" style="margin-left:${data.lblwidth}" type="submit" value="${btntxt}"> </div>`;
+
+
+_.raw=`<form action="" >${o}</form>`},listviewer:(_,data)=>{
+
+let x = data.data;
 let xid = ext.randid(10);
 
 _.raw = `<style>
     #${xid} .item{
         display:block;
         padding:0px 0px 6px 10px;
+        width:100%;
+        margin-top:1px;
     }
 </style>`;
 
@@ -2604,14 +2662,8 @@ let htmll= `<div id="${xid}">`;
 
 for (const key in x) {
     let txt = x[key]["txt"] ?? x[key];
-    if (x[key]["url"]!=undefined) {
-        htmll += `<a class="item" href="${x[key]["url"]}">${txt}</a>`;
-    }
-    else {
-        htmll += `<span class="item">${txt}</span>`;
-    }
+    htmll += `<button style="color: inherit" class="item xbtn txtbtn alignl" exec="${x[key].exec}" x-data="${x[key]["x-data"]}">${txt}</button>`;
+   
 }
-
 htmll += `</div>`;
-
 _.raw = htmll;},iconview:(_,data)=>{_.view = { type: "container", id: "x", class: "imgx", style: `height:${data.height}; width:${data.width};  background-image: url('${data.icon}')` };},};

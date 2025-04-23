@@ -1,12 +1,17 @@
 
 _.roles = "public:current";
-_.view = { type: "tv", txt: "This is DBMS HOME", class: "h1 redf" }
+_.class = "lh";
 
+_.include = "/snippets/leftmenu";
 
-// console.log(data.tablelist);
-// for (const i in data.tablelist) {
-    
-//     console.log(data.tablelist[i]);
-// }
-_.widget = { type: "listviewer", data: data.tablelist }
+_.view={id:"tabledataviewer", type:"container",style:" min-height:600px; min-width:800px;"}
+
+pagedata["loaddata"] = (e) => {
+    let tablename = $(e.target).attr("x-data");
+    $("#tabledataviewer").html("");
+    rqst.post(null, { tablename: tablename }, (resp) => {
+        _.widget = { type: "tableviewer", parent: "#tabledataviewer", data: resp[tablename], class:"px-4" ,style: "margin-top:20px; background:white;  " };
+    })
+}
+
 

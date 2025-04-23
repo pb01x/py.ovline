@@ -1,4 +1,9 @@
 
+.accent{
+    background: var(--accent);
+    color:white;
+}
+
 .whitebg{
     background: white;
     color: black;
