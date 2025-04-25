@@ -53,6 +53,7 @@ function process_ajax_data(dt) {
 
 function getsign(base64x) {
     // console.log("new local key",jskey+getvalue("localkey"));
+    console.log("jskey",jskey);
     return hash(base64x +jskey+getvalue("localkey"));
 }
 

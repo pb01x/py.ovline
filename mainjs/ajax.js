@@ -92,9 +92,7 @@ const rqst = {
                 progress(80);
                 let respx = JSON.parse(response);
                 let resp = JSON.parse(atob(respx["data"]));
-                
                 console.log(resp);
-           
                 if (callback) {
                     callback(resp);
                     progress(100);
@@ -109,13 +107,17 @@ const rqst = {
                 console.log("ERROR-ajax");
                 
             }
-
         });
     },
     handler: (response,updateurl) => {
         for (const key in response) {
             // console.log(key);
             switch (key) {
+                case "redirect":
+                    setTimeout(() => {
+                        ext.redirect(response[key]);
+                    }, 500);
+                    break
                 case "error":
                     console.log('%c%s','color:orange',response[key]);
                     break;

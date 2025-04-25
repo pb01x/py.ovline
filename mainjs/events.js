@@ -23,8 +23,12 @@ $("html").on("keydown", function (e) {
 
 $("html").on("submit", "form", (e) => {
   e.preventDefault();
-  console.log($(e.target).serializeArray());
-  rqst.post("", $(e.target).serializeArray(), (resp) => {
+  let arrdt = $(e.target).serializeArray();
+  let arrx = [];
+  for (const key in arrdt) {
+    arrx[arrdt[key]["name"]] = arrdt[key]["value"];
+  }
+  rqst.post("", arrx, (resp) => {
     console.log(resp);
   })
 })

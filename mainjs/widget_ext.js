@@ -235,10 +235,13 @@ const ext = {
     console.log(amt);
     return amt.replaceAll(",","");
   },
-  redirect: (url,parent, updateurl=false) => {
-    rqst.post(url, null, (resp) => {
-      handleLayout(resp.layout,parent);
-    rqst});
+  redirect: (url, parent, updateurl = false) => {
+    history.pushState(null, '', url);
+    location.reload()
+
+    // rqst.post(url, null, (resp) => {
+    //   handleLayout(resp.layout,parent);
+    // rqst});
   },
   popop: (layouts,callback) => {
     $("x-pop .content").html("");

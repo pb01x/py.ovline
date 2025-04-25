@@ -11,8 +11,12 @@ class io:
         return data
     
     
-    def witetofile(path, str):
-        f = open("public/"+path, "w")
+    def witetofile(path, str, ispublic=True):
+        if ispublic:
+            f = open("public/"+path, "w")
+        else:
+            f = open(path, "w")
+
         f.write(str)
         f.close()
                 

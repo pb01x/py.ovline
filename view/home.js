@@ -1,7 +1,5 @@
-_.roles = "public:current";
-
+_.roles = "public:current,std:__homestd.js";
 _.style = "background:#33884433";
-
 _.view = { type: "tv", txt: "This is Home", class: "h1 redf" }
 
 

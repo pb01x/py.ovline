@@ -3,7 +3,7 @@ import base64
 from system.o import o
 from system.io import io
 
-
+from urllib.parse import urlparse, parse_qs
 
 
 class postrouter:
@@ -25,13 +25,16 @@ class postrouter:
             print("empty post request")
             return
             
-        data = post_body.split("=")[1]
-        
+        params_dict = parse_qs(post_body)
+        # data = post_body.split("=")[1]
+        data=params_dict["data"][0]
+        self.o.rawreqdata=params_dict
         data=json.loads(base64.b64decode(data.replace("%3D","=")))
         self.o.logx(data)
         self.o.pars=data
            
         apid=data.get("apid")
+        
         if apid=="init":
             self.init()
         elif data.get("nodes") !=None:
@@ -85,6 +88,7 @@ class postrouter:
     
     
     def  readpage(self,file):
+        print(file)
         from system.io import io
         layout=""
         try:
@@ -92,13 +96,18 @@ class postrouter:
             layout= self.includeInclude(layout)
         except Exception:
             print(Exception)
-            print((self.o.req.mvcpath+"view"+self.o.page+".js").replace("/.js","/home.js")+" not found")
+            print(self.o.req.mvcpath+"view"+file+" not found")
         
-        # print(layout)
-        if self.o.security.pageroles_permission(layout) !=1:
+        pageper=self.o.security.pageroles_permission(layout)
+        print(pageper)
+        if pageper ==0:
             print("PERMISSION DENIED")
             layout="_.raw=`DENIED`"
-        return layout
+        elif pageper ==1:
+            return layout
+        else:
+            return self.readpage(pageper)
+    
     
     
     def includeInclude(self,layout):

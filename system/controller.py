@@ -29,11 +29,13 @@ class controller:
         return self.db.fetch(q)
         
         
-    def Model(self,path,nodes, data=None):
+    def Model(self,path,nodes, data=None, pdata=None, dictionary=False):
         from system.model import model
-        return model(o=self.o, path=path,nodes= nodes.split(","),data=data).output
-        
+        return model(o=self.o, path=path,nodes= nodes.split(","),data=data, pdata=pdata, dictionary=dictionary).output
         
        
     def renderpage(self):
         self.o.renderpage=True
+        
+        
+        

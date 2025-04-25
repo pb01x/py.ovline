@@ -3,13 +3,15 @@ from system.io import io
 import json
 
 class model:
-    def __init__(self, o, path, nodes, ispublic=False, data=None):
+    def __init__(self, o, path, nodes, ispublic=False, data=None, pdata=None, dictionary=False):
         self.o=o
         self.db=None
         self.path= o.req.mvcpath+path
         self.nodes=nodes
         self.allnodes=json.loads(io.readfile(o.req.mvcpath+"model/"+path+".json"))
         self.data=data
+        self.pdata=pdata
+        self.dictionary=dictionary
         # self.o.logx(self.nodes[node])
         output={}
         self.output=output
@@ -34,7 +36,8 @@ class model:
         query=rawnode["query"]
         query=self.insertSubquery(rawnode,query)
         print(query)
-        return self.db.fetch(query)
+        
+        return self.db.fetch(query,self.pdata, self.dictionary)
         
         
         

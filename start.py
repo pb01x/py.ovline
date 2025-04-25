@@ -1,9 +1,12 @@
 import argparse
 from http.server import HTTPServer, BaseHTTPRequestHandler
-# from config import config
 import os
 import platform
 import sys
+from system.io import io
+# from system.session import session
+import json
+
 # from router import router
 
 class start(BaseHTTPRequestHandler):
@@ -70,18 +73,29 @@ def clearterminal():
     else:
         print("\n" * 100)
     
-    
+
+
 def startserver(port=None, serverfunc=None):
     try:
+        
+        from system.session import session
+        sess= io.readfile("sessioncache.json" )
+        session.data=json.loads(sess)
         run(addr=args.listen, port=port if port!=None else args.port)
     except KeyboardInterrupt:
+        
+        from system.session import session
+        io.witetofile("sessioncache.json", json.dumps(session.data),False )
+        
+        print(io.readfile("sessioncache.json"))
+        
         print('SERVER STOPPED BY KEYBOARD STOP SIGNAL')
-        try:
-            clearterminal()
-            print("Server Stopped")
-            sys.exit(130)
-        except SystemExit:
-            os._exit(130)
+        # try:
+        #     clearterminal()
+        #     print("Server Stopped")
+        #     sys.exit(130)
+        # except SystemExit:
+        #     os._exit(130)
             
 
 if __name__ == "__main__":
@@ -94,6 +108,7 @@ if __name__ == "__main__":
     clearterminal()
     from system import staticfilebuilder
     staticfilebuilder.staticfilebuilder.buildfiles()
+    
     
     if args.dbms:
         import threading

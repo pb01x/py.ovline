@@ -1,4 +1,4 @@
-from start import staticx
+# from start import staticx
 import json
 import base64
 from system.session import session
@@ -6,7 +6,7 @@ from system.security import security
 
 
 class o:
-    tempx=staticx
+    # tempx=staticx
     def __init__(self, req):
         self.req=req
         self.session=session(self)
@@ -25,6 +25,9 @@ class o:
         jsnoutput=json.dumps(self.output).encode()
         base64output= base64.b64encode(jsnoutput).decode("utf-8")
         finaldata={"data":base64output}
+        if self.session.data.get("localkey")!=None:
+            sign=security.hash(base64output+self.session.data["localkey"])
+            finaldata["sign"]=sign
         # self.logx(json.dumps(finaldata))
         return json.dumps(finaldata).encode()
         

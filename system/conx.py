@@ -16,10 +16,33 @@ class conx():
         except sqlite3.Error as e:
             print(f"Error executing query: {e}")
             
-    def fetch(self, q):
+            
+    def dict_factory(cursor, row):
+        d = {}
+        for idx, col in enumerate(cursor.description):
+            d[col[0]] = row[idx]
+        return d
+
+
+    def fetch(self, q,pdata,dictionary=False):
         try:
+            
+            if dictionary:
+                self.con.row_factory=conx.dict_factory
+                
             cursor = self.con.cursor()
-            cursor.execute(q)
+            if pdata!=None:
+                cursor.execute(q,pdata)
+            else:
+                cursor.execute(q)
+                
+            if q.find("Insert")!=-1 or q.find("INSERT")!=-1:
+                self.con.commit()
+                return cursor.lastrowid
+                
+            if dictionary:
+                return cursor.fetchall()
+                
             data={}
             data["name"]=[description[0] for description in cursor.description]
             data["data"]=cursor.fetchall()

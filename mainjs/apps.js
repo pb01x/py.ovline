@@ -5,15 +5,23 @@ const apps = {
         let publickey=ext.randid(64);
         let pswd=hash(allpars["password"]);
         let timestamp=(new Date()).valueOf();
-        let localkey=hash(pswd+publickey)+"-"+timestamp;
+        let localkey = hash(pswd + publickey) + "-" + timestamp;
+
+
+        console.log("pswd",   pswd);
+        console.log("publickey",   publickey);
+        console.log("join",pswd + publickey);
+        
+        console.log("localkey",localkey);
+        
       
-        console.log("locakkey js ",localkey);
+        // console.log("locakkey js ",localkey);
 
         storeval("localkey",localkey);
 
         let parx=[];
         parx["timestampx"]=timestamp;
-        parx["apid"]="login__user";
+        parx["fun"]="loginsubmit";
         parx["publickey"]=publickey;
         parx["username"]=allpars["username"];
       
@@ -31,7 +39,6 @@ const apps = {
             } else {
                 $("#loginstatus").css("display", "block");
             }
-
 
         });
 

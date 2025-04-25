@@ -104,9 +104,7 @@ const rqst = {
                 progress(80);
                 let respx = JSON.parse(response);
                 let resp = JSON.parse(atob(respx["data"]));
-                
                 console.log(resp);
-           
                 if (callback) {
                     callback(resp);
                     progress(100);
@@ -121,13 +119,17 @@ const rqst = {
                 console.log("ERROR-ajax");
                 
             }
-
         });
     },
     handler: (response,updateurl) => {
         for (const key in response) {
             // console.log(key);
             switch (key) {
+                case "redirect":
+                    setTimeout(() => {
+                        ext.redirect(response[key]);
+                    }, 500);
+                    break
                 case "error":
                     console.log('%c%s','color:orange',response[key]);
                     break;
@@ -220,15 +222,23 @@ const apps = {
         let publickey=ext.randid(64);
         let pswd=hash(allpars["password"]);
         let timestamp=(new Date()).valueOf();
-        let localkey=hash(pswd+publickey)+"-"+timestamp;
+        let localkey = hash(pswd + publickey) + "-" + timestamp;
+
+
+        console.log("pswd",   pswd);
+        console.log("publickey",   publickey);
+        console.log("join",pswd + publickey);
+        
+        console.log("localkey",localkey);
+        
       
-        console.log("locakkey js ",localkey);
+        // console.log("locakkey js ",localkey);
 
         storeval("localkey",localkey);
 
         let parx=[];
         parx["timestampx"]=timestamp;
-        parx["apid"]="login__user";
+        parx["fun"]="loginsubmit";
         parx["publickey"]=publickey;
         parx["username"]=allpars["username"];
       
@@ -246,7 +256,6 @@ const apps = {
             } else {
                 $("#loginstatus").css("display", "block");
             }
-
 
         });
 
@@ -897,8 +906,12 @@ $("html").on("keydown", function (e) {
 
 $("html").on("submit", "form", (e) => {
   e.preventDefault();
-  console.log($(e.target).serializeArray());
-  rqst.post("", $(e.target).serializeArray(), (resp) => {
+  let arrdt = $(e.target).serializeArray();
+  let arrx = [];
+  for (const key in arrdt) {
+    arrx[arrdt[key]["name"]] = arrdt[key]["value"];
+  }
+  rqst.post("", arrx, (resp) => {
     console.log(resp);
   })
 })
@@ -1836,6 +1849,7 @@ function process_ajax_data(dt) {
 
 function getsign(base64x) {
     // console.log("new local key",jskey+getvalue("localkey"));
+    console.log("jskey",jskey);
     return hash(base64x +jskey+getvalue("localkey"));
 }
 
@@ -2310,10 +2324,13 @@ const ext = {
     console.log(amt);
     return amt.replaceAll(",","");
   },
-  redirect: (url,parent, updateurl=false) => {
-    rqst.post(url, null, (resp) => {
-      handleLayout(resp.layout,parent);
-    rqst});
+  redirect: (url, parent, updateurl = false) => {
+    history.pushState(null, '', url);
+    location.reload()
+
+    // rqst.post(url, null, (resp) => {
+    //   handleLayout(resp.layout,parent);
+    // rqst});
   },
   popop: (layouts,callback) => {
     $("x-pop .content").html("");
@@ -2628,22 +2645,37 @@ _.raw = `<table>${outx}</table>`;
 },formx:(_,data)=>{
 
 
-console.log(data);
+// console.log(data);
 
 let inputs = data.data;
 
 let o = "";
 for (const i in inputs) {
-    console.log(inputs[i]);
+    // console.log(inputs[i]);
     let x = inputs[i];
-    o += `<div class="p-2"><label  style=" display:inline-block; width:${data.lblwidth}" for="${x.name}">${x.txt}</label> <input name="${x.name}" type="${x.type}" value=""></div>`;
+    let display = "inline-block";
+    if (x.type=="hidden") {
+        display = "none";
+    }
+
+    o += `<div class="p-2"><label  style=" display:${display}; width:${data.lblwidth}" for="${x.name}">${x.txt}</label> <input id="${x.name}" name="${x.name}" type="${x.type}" value="${x.value??""}"></div>`;
+   
 }
 
-let btntxt = data.btntxt??"Submit";
-o += `<div class="p-2"> <input class="btn" style="margin-left:${data.lblwidth}" type="submit" value="${btntxt}"> </div>`;
+let btntxt = data.btntxt ?? "Submit";
+let formpost = data.form ?? true;
 
 
-_.raw=`<form action="" >${o}</form>`},listviewer:(_,data)=>{
+
+if (formpost) {
+    o += `<div class="p-2"> <input class="btn" style="margin-left:${data.lblwidth}" type="submit" value="${btntxt}"> </div>`;
+    _.raw=`<form action="" >${o}</form>`
+    
+}
+else {
+    _.raw = o;
+    
+}},listviewer:(_,data)=>{
 
 let x = data.data;
 let xid = ext.randid(10);
