@@ -8,22 +8,40 @@ let inputdata = [
     { name: "userid", txt: "UserName", type: "text", value:"prajwal" },
     { name: "password", txt:"Password", type:"password", value:"hydrogen" }
 ]
+
+_.view = { type: "container", id: "logincontainer", class: "p-4 m-4", style: "display:block; background: #88335533; border-radius:10px;" };
+_.parent = "#logincontainer";
+
+_.view = { type: "tv", txt: "Login", class: "h2 redf" };
+
 _.widget = { type: "formx", data: inputdata, lblwidth: "120px", btntxt:"Login", form:false };
-_.view = { type: "btn", txt: "Login", attr:{exec:"submitlogin"}, class:"xbtn btn", style: "margin-top:4px; margin-left:120px" };
+_.view = { type: "btn", txt: "Login", attr:{exec:"submitlogin"}, class:"xbtn btn", style: "margin-top:4px; margin-left:125px" };
 
-
+_.view = { type: "btn", txt: "Create a new account.", attr:{exec:"shownewuserform"}, class:"xbtn ", style: "display:block; margin-top:4px; margin-left:120px" };
 
 pagedata["submitlogin"] = (e) => {
+
     apps.login({ username: $("#userid").val(), password: $("#password").val() });
-
-
 }
 
+pagedata["shownewuserform"] = (e) => {
+    if ($("#newuser").css("display") == "none") {
+        $("#newuser").css("display", "block");
+        $("#logincontainer").css("display", "none");
+        
+    }
+    else {
+        $("#newuser").css("display", "none");
+        $("#logincontainer").css("display", "block");
+    }
+    
+}
+    
 
 
 // create new user
 
-_.view = { type: "container", id: "newuser", class:"p-4 m-4", style:"background: #88335533" }
+_.view = { type: "container", id: "newuser", parent:"x-bdy", class:"p-4 m-4", style:"display:none; background: #88335533; border-radius:10px;" }
 _.parent = "#newuser";
 _.view = { type: "tv", txt: "Create New User", class: "h3 block" };
 let inputs = [
@@ -34,6 +52,8 @@ let inputs = [
 ]
 _.widget = { type: "formx", data: inputs, lblwidth: "120px", btntxt:"Create New User"  };
 
+
+_.view = { type: "btn", txt: "Already Have Account, Login", attr:{exec:"shownewuserform"}, class:"xbtn ", style: "display:block; margin-top:4px; margin-left:120px" };
 
 
 // function hash(str, algo) {

@@ -14,14 +14,58 @@
 .root_dark{
     --bg:rgb(37, 40, 43);
     --fg:white;
-    --accent:rgb(47, 61, 115);
+    --inpbg:rgba(141, 141, 141, 0.363);
+    --inpfocus:rgb(70, 97, 107);
+    --inpfg: rgb(255, 255, 255);
+    --cmenubg:rgb(71, 71, 71);
+    --clr:white;
+    --btn_bg: #818181bb;
+    --topbarbg: rgba(125, 125, 125, 0.295);
+    --accent:rgb(51, 111, 160);
+    --accentx:rgba(49, 102, 145, 0.507);
+    --accentt:rgb(192, 77, 0);
+    --accents:rgb(59, 81, 179);
+    --btn_fg: #000000fb;
+    --lmenu_width: 200px;
+    --brdr-small:4px;
+    --red:rgb(248, 59, 59);
+    --green:rgb(112, 215, 29);
+    --blue:rgb(0, 132, 255);
+    --pink:rgb(253, 35, 206);
+    --purple:rgb(143, 74, 253);
+    --orange:rgb(255, 102, 0);
+    --yellow:rgb(255, 221, 0);
+    --grey:rgb(187, 187, 187);
+    --cyan:rgb(0, 255, 255);
    
     /*colorsdark*/
 }
 .root_light{
     --bg:rgb(216, 223, 233);
     --fg:rgb(0, 0, 0);
-    --accent:rgb(47, 61, 115);
+    --inpbg:rgba(255, 255, 255, 0.575);
+    --inpfocus:rgb(255, 255, 255);
+    --inpfg: rgb(0, 0, 0);
+    --cmenubg:rgb(0, 0, 0);
+    --clr:rgb(0, 0, 0);
+    --btn_bg: #818181bb;
+    --topbarbg: rgba(125, 125, 125, 0.295);
+    --accent:rgb(51, 111, 160);
+    --accentx:rgba(49, 102, 145, 0.507);
+    --accentt:rgb(255, 102, 0);
+    --accents:rgb(59, 81, 179);
+    --btn_fg: #fffffffb;
+    --lmenu_width: 200px;
+    --brdr-small:4px;
+    --green:rgb(75, 154, 11);
+    --red:rgb(255, 0, 0);
+    --blue:rgb(32, 99, 161);
+    --pink:rgb(197, 23, 159);
+    --purple:rgb(95, 36, 189);
+    --orange:rgb(221, 119, 51);
+    --yellow:rgb(173, 124, 31);
+    --grey:rgb(56, 56, 56);
+    --cyan:rgb(0, 163, 163);
 }
 
 

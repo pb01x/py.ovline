@@ -1,24 +1,30 @@
 _.roles = "public:current,std:__homestd.js";
 _.style = "background:#33884433";
-_.view = { type: "tv", txt: "This is Home", class: "h1 redf" }
+_.view = { type: "tv", txt: "This is Home", class: "h1 " }
 
 
-_.view = { type: "btn", class: "xbtn ml-2", attr: { exec: `testbtn` }, txt: "test btn" }
 
 
-pagedata["testbtn"] = (e) => {
-    console.log("yes its working");
+// _.view = { type: "btn", class: "xbtn ml-2", attr: { exec: `testbtn` }, txt: "test btn" }
 
 
-    // rqst.post(null, {path:"test", nodes:"__nepsedata,fsheetx", username:"prajwal", surname:"basnet"}, (resp) => {
-    //     console.log(resp);
-    // })
+// pagedata["testbtn"] = (e) => {
+//     console.log("yes its working");
 
-    rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
-        console.log(resp);
-    })
-    // rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
-    //     console.log(resp);
-    // })
 
-}
+//     // rqst.post(null, {path:"test", nodes:"__nepsedata,fsheetx", username:"prajwal", surname:"basnet"}, (resp) => {
+//     //     console.log(resp);
+//     // })
+
+//     rqst.post(null, { fun: "directCall", username: "prajwal", surname: "basnet" }, (resp) => {
+//         console.log(resp);
+//     })
+//     // rqst.post(null, {fun:"__testx", username:"prajwal", surname:"basnet"}, (resp) => {
+//     //     console.log(resp);
+//     // })
+
+// }
+
+
+
+_.include="/login";
